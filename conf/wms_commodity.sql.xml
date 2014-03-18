@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+  "-//mybatis.org//DTD Mapper 3.0//EN" 
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.moemao.tgks.wms.commodity.dao.CommodityDao">
+<select id="wms_queryCommodity" parameterType="CommodityReq" resultType="CommodityEvt" resultMap="CommodityEvtMap">
+        <![CDATA[  
+            SELECT t.id, t.code, t.name, t.type, t.status, t.number, t.unit, t.price, t.material, t.model, t.spec, t.supplier, t.createtime, t.remark FROM t_tgks_wms_commodity t
+        ]]>
+        <where>
+                1=1
+            <if test="id !=null and id !='' ">
+                AND t.ID = #{id}
+            </if>
+            <if test="code !=null and code !='' ">
+                AND t.CODE LIKE CONCAT(CONCAT('%', #{code}),'%')
+            </if>
+            <if test="name !=null and name !='' ">
+                AND t.NAME LIKE CONCAT(CONCAT('%', #{name}),'%')
+            </if>
+            <if test="type !=null and type !='' ">
+                AND t.TYPE = #{type}
+            </if>
+            <if test="status !=null and status !='' ">
+                AND t.STATUS = #{status}
+            </if>
+            <if test="number !=null and number !='' ">
+                AND t.NUMBER = #{number}
+            </if>
+            <if test="unit !=null and unit !='' ">
+                AND t.UNIT = #{unit}
+            </if>
+            <if test="price !=null and price !='' ">
+                AND t.PRICE = #{price}
+            </if>
+            <if test="supplier !=null and supplier !='' ">
+                AND t.SUPPLIER LIKE CONCAT(CONCAT('%', #{supplier}),'%')
+            </if>
+            <if test="createTimeStart !=null and createTimeStart !='' ">
+                AND t.CREATETIME >= #{createTimeStart}
+            </if>
+            <if test="createTimeEnd !=null and createTimeEnd !='' ">
+                AND #{createTimeEnd} >= t.CREATETIME
+            </if>
+        </where>
+        <if test="sortSql !=null and sortSql !='' ">
+            ORDER BY ${sortSql}
+        </if>
+</select>
+
+<insert id="wms_addCommodity" parameterType="CommodityEvt">
+        <![CDATA[  
+            INSERT INTO t_tgks_wms_commodity (id, code, name, type, status, number, unit, price, material, model, spec, supplier, createtime, remark) 
+            VALUES (#{id}, #{code}, #{name}, #{type}, #{status}, #{number}, #{unit}, #{price}, #{material}, #{model}, #{spec}, #{supplier}, #{createTime}, #{remark}) 
+        ]]>
+</insert>
+
+<update id="wms_updateCommodity" parameterType="CommodityEvt">
+        <![CDATA[  
+            UPDATE t_tgks_wms_commodity SET 
+                       code = #{code},
+                       name = #{name},
+                       type = #{type},
+                       status = #{status},
+                       number = #{number},
+                       unit = #{unit},
+                       price = #{price},
+                       material = #{material},
+                       model = #{model},
+                       spec = #{spec},
+                       supplier = #{supplier},
+                       createtime = #{createTime},
+                       remark = #{remark}
+             WHERE ID = #{id}
+        ]]>
+</update>
+
+<delete id="wms_deleteCommodity" parameterType="list">
+        <![CDATA[  
+            DELETE FROM t_tgks_wms_commodity WHERE id IN
+        ]]>
+        <foreach collection="list" item="ids"  open="(" separator="," close=")">
+            #{ids}
+        </foreach>
+</delete>
+</mapper>

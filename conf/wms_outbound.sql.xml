@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+  "-//mybatis.org//DTD Mapper 3.0//EN" 
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.moemao.tgks.wms.outbound.dao.OutboundDao">
+<select id="wms_queryOutbound" parameterType="OutboundReq" resultType="OutboundEvt" resultMap="OutboundEvtMap">
+        <![CDATA[  
+            SELECT t.id, t.code, t.name, t.type, t.print, t.number, t.unit, t.price, t.tax, t.total, t.material, t.model, t.spec, t.custom, t.createtime, t.commodityid, t.remark FROM t_tgks_wms_outbound t
+        ]]>
+        <where>
+                1=1
+            <if test="id !=null and id !='' ">
+                AND t.ID = #{id}
+            </if>
+            <if test="code !=null and code !='' ">
+                AND t.CODE LIKE CONCAT(CONCAT('%', #{code}),'%')
+            </if>
+            <if test="name !=null and name !='' ">
+                AND t.NAME LIKE CONCAT(CONCAT('%', #{name}),'%')
+            </if>
+            <if test="type !=null and type !='' ">
+                AND t.TYPE = #{type}
+            </if>
+            <if test="print !=null and print !='' ">
+                AND t.PRINT = #{print}
+            </if>
+            <if test="price !=null and price !='' ">
+                AND t.PRICE = #{price}
+            </if>
+            <if test="custom !=null and custom !='' ">
+                AND t.CUSTOM LIKE CONCAT(CONCAT('%', #{custom}),'%')
+            </if>
+            <if test="createTimeStart !=null and createTimeStart !='' ">
+                AND t.CREATETIME >= #{createTimeStart}
+            </if>
+            <if test="createTimeEnd !=null and createTimeEnd !='' ">
+                AND #{createTimeEnd} >= t.CREATETIME
+            </if>
+        </where>
+        <if test="sortSql !=null and sortSql !='' ">
+            ORDER BY ${sortSql}
+        </if>
+</select>
+
+<insert id="wms_addOutbound" parameterType="OutboundEvt">
+        <![CDATA[  
+            INSERT INTO t_tgks_wms_outbound (id, code, name, type, print, number, unit, price, tax, total, material, model, spec, custom, createtime, commodityid, remark) 
+            VALUES (#{id}, #{code}, #{name}, #{type}, #{print}, #{number}, #{unit}, #{price}, #{tax}, ${total}, #{material}, #{model}, #{spec}, #{custom}, #{createTime}, #{commodityId}, #{remark}) 
+        ]]>
+</insert>
+
+<update id="wms_updateOutbound" parameterType="OutboundEvt">
+        <![CDATA[  
+            UPDATE t_tgks_wms_outbound SET 
+                       code = #{code},
+                       name = #{name},
+                       type = #{type},
+                       print = #{print},
+                       number = #{number},
+                       unit = #{unit},
+                       price = #{price},
+                       tax = #{tax},
+                       total = #{total},
+                       custom = #{custom},
+                       createtime = #{createTime},
+                       commodityid = #{commodityId},
+                       remark = #{remark}
+             WHERE ID = #{id}
+        ]]>
+</update>
+
+<delete id="wms_deleteOutbound" parameterType="list">
+        <![CDATA[  
+            DELETE FROM t_tgks_wms_outbound WHERE id IN
+        ]]>
+        <foreach collection="list" item="ids"  open="(" separator="," close=")">
+            #{ids}
+        </foreach>
+</delete>
+
+<select id="wms_queryOutboundByIds" parameterType="list" resultType="OutboundEvt" resultMap="OutboundEvtMap">
+        <![CDATA[  
+            SELECT t.id, t.code, t.name, t.type, t.print, t.number, t.unit, t.price, t.total, t.tax, t.material, t.model, t.spec, t.custom, t.createtime, t.commodityid, t.remark FROM t_tgks_wms_outbound t WHERE id IN
+        ]]>
+        <foreach collection="list" item="ids"  open="(" separator="," close=")">
+            #{ids}
+        </foreach>
+</select>
+
+<update id="wms_updateOutboundPrintOn" parameterType="list">
+        <![CDATA[  
+            UPDATE t_tgks_wms_outbound SET 
+                       print = '1'
+             WHERE id IN
+        ]]>
+        <foreach collection="list" item="ids"  open="(" separator="," close=")">
+            #{ids}
+        </foreach>
+</update>
+</mapper>

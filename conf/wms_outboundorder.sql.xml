@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+  "-//mybatis.org//DTD Mapper 3.0//EN" 
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.moemao.tgks.wms.outboundorder.dao.OutboundOrderDao">
+<select id="wms_queryOutboundOrder" parameterType="OutboundOrderReq" resultType="OutboundOrderEvt" resultMap="OutboundOrderEvtMap">
+        <![CDATA[  
+            SELECT t.id, t.outboundid, t.custom, t.createtime FROM t_tgks_wms_outboundorder t
+        ]]>
+        <where>
+                1=1
+            <if test="id !=null and id !='' ">
+                AND t.ID LIKE CONCAT(CONCAT('%', #{id}),'%')
+            </if>
+            <if test="outboundId !=null and outboundId !='' ">
+                AND t.OUTBOUNDID = #{outboundId}
+            </if>
+            <if test="custom !=null and custom !='' ">
+                AND t.CUSTOM LIKE CONCAT(CONCAT('%', #{custom}),'%')
+            </if>
+            <if test="createTimeStart !=null and createTimeStart !='' ">
+                AND t.CREATETIME >= #{createTimeStart}
+            </if>
+            <if test="createTimeEnd !=null and createTimeEnd !='' ">
+                AND #{createTimeEnd} >= t.CREATETIME
+            </if>
+        </where>
+        <if test="sortSql !=null and sortSql !='' ">
+            ORDER BY ${sortSql}
+        </if>
+</select>
+
+<select id="wms_queryOutboundOrderByIds" parameterType="list" resultType="OutboundOrderEvt" resultMap="OutboundOrderEvtMap">
+        <![CDATA[  
+            SELECT t.id, t.outboundid, t.custom, t.createtime FROM t_tgks_wms_outboundorder t WHERE id IN
+        ]]>
+        <foreach collection="list" item="ids"  open="(" separator="," close=")">
+            #{ids}
+        </foreach>
+</select>
+
+<insert id="wms_addOutboundOrder" parameterType="OutboundOrderEvt">
+        <![CDATA[  
+            INSERT INTO t_tgks_wms_outboundorder (id, outboundid, custom, createtime) 
+            VALUES (#{id}, #{outboundId}, #{custom}, #{createTime}) 
+        ]]>
+</insert>
+
+<update id="wms_updateOutboundOrder" parameterType="OutboundOrderEvt">
+        <![CDATA[  
+            UPDATE t_tgks_wms_outboundorder SET 
+                       outboundid = #{outboundId},
+                       custom = #{custom},
+                       createtime = #{createTime}
+             WHERE ID = #{id}
+        ]]>
+</update>
+
+<delete id="wms_deleteOutboundOrder" parameterType="list">
+        <![CDATA[  
+            DELETE FROM t_tgks_wms_outboundorder WHERE id IN
+        ]]>
+        <foreach collection="list" item="ids"  open="(" separator="," close=")">
+            #{ids}
+        </foreach>
+</delete>
+</mapper>

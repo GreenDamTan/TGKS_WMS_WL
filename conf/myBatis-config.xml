@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC 
+"-//mybatis.org//DTD Config 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- 别名 -->
+	<typeAliases>
+		<!-- common_frame -->
+	    <typeAlias alias="MenuEvt" type="com.moemao.tgks.common.frame.menu.entity.MenuEvt" />
+		<typeAlias alias="MenuReq" type="com.moemao.tgks.common.frame.menu.entity.MenuReq" />
+		
+		<!-- common_module -->
+	    <typeAlias alias="ModuleEvt" type="com.moemao.tgks.common.module.entity.ModuleEvt" />
+		<typeAlias alias="ModuleReq" type="com.moemao.tgks.common.module.entity.ModuleReq" />
+		
+		<!-- common_systemConfig -->
+	    <typeAlias alias="SystemConfigEvt" type="com.moemao.tgks.common.systemconfig.entity.SystemConfigEvt" />
+		<typeAlias alias="SystemConfigReq" type="com.moemao.tgks.common.systemconfig.entity.SystemConfigReq" />
+		
+		<!-- ums -->
+		<typeAlias alias="AdminEvt" type="com.moemao.tgks.common.ums.admin.entity.AdminEvt" />
+		<typeAlias alias="AdminReq" type="com.moemao.tgks.common.ums.admin.entity.AdminReq" />
+		
+		<!-- ums_﻿user -->
+		<typeAlias alias="UserEvt" type="com.moemao.tgks.common.ums.user.entity.UserEvt" />
+		<typeAlias alias="UserReq" type="com.moemao.tgks.common.ums.user.entity.UserReq" />
+		
+		<!-- ums_﻿usermenu -->
+		<typeAlias alias="UserMenuEvt" type="com.moemao.tgks.common.ums.usermenu.entity.UserMenuEvt" />
+		<typeAlias alias="UserMenuReq" type="com.moemao.tgks.common.ums.usermenu.entity.UserMenuReq" />
+		
+		<!-- wms_﻿category -->
+		<typeAlias alias="CategoryEvt" type="com.moemao.tgks.wms.category.entity.CategoryEvt" />
+		<typeAlias alias="CategoryReq" type="com.moemao.tgks.wms.category.entity.CategoryReq" />
+		
+		<!-- wms_﻿commodity -->
+		<typeAlias alias="CommodityEvt" type="com.moemao.tgks.wms.commodity.entity.CommodityEvt" />
+		<typeAlias alias="CommodityReq" type="com.moemao.tgks.wms.commodity.entity.CommodityReq" />
+		
+		<!-- wms_﻿outbound -->
+		<typeAlias alias="OutboundEvt" type="com.moemao.tgks.wms.outbound.entity.OutboundEvt" />
+		<typeAlias alias="OutboundReq" type="com.moemao.tgks.wms.outbound.entity.OutboundReq" />
+		
+		<!-- wms_﻿outboundorder -->
+		<typeAlias alias="OutboundOrderEvt" type="com.moemao.tgks.wms.outboundorder.entity.OutboundOrderEvt" />
+		<typeAlias alias="OutboundOrderReq" type="com.moemao.tgks.wms.outboundorder.entity.OutboundOrderReq" />
+		
+		<!-- wms_﻿storage -->
+		<typeAlias alias="StorageEvt" type="com.moemao.tgks.wms.storage.entity.StorageEvt" />
+		<typeAlias alias="StorageReq" type="com.moemao.tgks.wms.storage.entity.StorageReq" />
+		
+		<!-- wms_﻿deal -->
+		<typeAlias alias="DealEvt" type="com.moemao.tgks.wms.deal.entity.DealEvt" />
+		<typeAlias alias="DealReq" type="com.moemao.tgks.wms.deal.entity.DealReq" />
+		
+		<!-- wms_﻿order -->
+		<typeAlias alias="OrderEvt" type="com.moemao.tgks.wms.order.entity.OrderEvt" />
+		<typeAlias alias="OrderReq" type="com.moemao.tgks.wms.order.entity.OrderReq" />
+		
+		<!-- wms_﻿supplier -->
+		<typeAlias alias="SupplierEvt" type="com.moemao.tgks.wms.supplier.entity.SupplierEvt" />
+		<typeAlias alias="SupplierReq" type="com.moemao.tgks.wms.supplier.entity.SupplierReq" />
+		
+		<!-- wms_﻿custom -->
+		<typeAlias alias="CustomEvt" type="com.moemao.tgks.wms.custom.entity.CustomEvt" />
+		<typeAlias alias="CustomReq" type="com.moemao.tgks.wms.custom.entity.CustomReq" />
+		
+	</typeAliases>
+</configuration>
